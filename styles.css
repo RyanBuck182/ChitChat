@@ -1,0 +1,215 @@
+html {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+h1 {
+    text-align: center;
+    font-size: 4dvh;
+    margin: 0;
+    margin-bottom: 0.25dvh;
+}
+
+h2 {
+    font-size: 2.5dvh;
+    margin: 0;
+}
+
+h3 {
+    font-size: 2dvh;
+    margin: 0;
+}
+
+#messageComposer {
+    border: 0.2dvh solid black;
+    border-radius: 0.8dvh;
+    margin-bottom: 0.25dvh;
+}
+
+#messageComposer header {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    padding-inline: 0.2dvh;
+    margin-bottom: 0.1dvh;
+}
+
+#inputBox {
+    display: block;
+    box-sizing: border-box;
+    font-size: 2dvh;
+    width: 100%;
+    height: 20dvh;
+    border-radius: 0.8dvh;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    border-inline: none;
+    border-bottom: none;
+    margin-inline: auto;
+    padding-inline: 0.3dvh;
+    resize: none;
+}
+
+#refreshButton {   
+    display: block;
+    font-size: 3dvh;
+    background-color: whitesmoke;
+    border: 0.2dvh solid black;
+    border-radius: 1dvh;
+    padding-inline: 0.2dvh;
+    margin-block: 0.2dvh;
+    margin-inline: 0.1dvh;
+}
+
+#postButton {   
+    display: block;
+    font-size: 3dvh;
+    background-color: whitesmoke;
+    border: 0.2dvh solid black;
+    border-radius: 1dvh;
+    padding-inline: 0.2dvh;
+    margin-block: 0.2dvh;
+    margin-inline: 0.1dvh;
+}
+
+#messageContainer {
+    display: grid;
+    align-self: center;
+}
+
+.message {
+    border: 0.2dvh solid black;
+    border-radius: 1dvh;
+    padding: 0.25dvh;
+    margin-bottom: 0.25dvh;
+}
+
+.message header {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+}
+
+.ratings img {
+    height: 2.3dvh;
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+}
+
+.ratings button {
+    background-color: inherit;
+    border: none;
+    padding: 0;
+}
+
+.count {
+    font-size: 2dvh;
+}
+
+.content {
+    display: table;
+    table-layout: fixed;
+    font-size: 2dvh;
+    word-wrap: break-word;
+    width: 100%;
+    margin: 0;
+}
+
+.message footer {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+}
+
+.left {
+    margin-right: auto;
+}
+
+.right {
+    margin-left: auto;
+}
+
+#loadButton {   
+    display: block;
+    font-size: 3dvh;
+    background-color: whitesmoke;
+    border: 0.2dvh solid black;
+    border-radius: 1dvh;
+    margin-inline: auto;
+}
+
+@media screen and (max-width: 800px) {
+    h1 {
+        font-size: 8dvw;
+        margin-bottom: 0.25dvw;
+    }
+    
+    h2 {
+        font-size: 3dvw;
+    }
+    
+    h3 {
+        font-size: 3dvw;
+    }
+
+    #messageComposer {
+        border: 0.2dvw solid black;
+        border-radius: 0.8dvw;
+        margin-bottom: 0.25dvw;
+    }
+    
+    #messageComposer header {
+        padding-inline: 0.2dvw;
+        margin-bottom: 0.1dvw;
+    }
+
+    #inputBox {
+        font-size: 3.2dvw;
+        width: 100%;
+        height: 25dvw;
+        border-radius: 0.8dvw;
+        padding-inline: 0.3dvw;
+    }
+
+    #refreshButton {   
+        font-size: 4dvw;
+        border: 0.2dvw solid black;
+        border-radius: 1dvw;
+        padding-inline: 0.2dvw;
+        margin-block: 0.2dvw;
+        margin-inline: 0.1dvw;
+    }
+
+    #postButton {   
+        font-size: 4dvw;
+        border: 0.2dvw solid black;
+        border-radius: 1dvw;
+        padding-inline: 0.2dvw;
+        margin-block: 0.2dvw;
+        margin-inline: 0.1dvw;
+    }
+
+    .message {
+        border: 0.2dvw solid black;
+        border-radius: 1dvw;
+        padding: 0.25dvw;
+        margin-bottom: 0.25dvw;
+    }
+    
+    .count {
+        font-size: 3.2dvw;
+    }
+    
+    .ratings img {
+        height: 2.6dvw;
+    }
+
+    .content {
+        font-size: 2.8dvw;
+    }
+    
+    #loadButton {   
+        font-size: 4dvw;
+        border: 0.2dvw solid black;
+        border-radius: 1dvw;
+    }
+}

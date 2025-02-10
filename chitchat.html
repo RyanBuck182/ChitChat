@@ -1,0 +1,27 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <script src="main.js" defer></script>
+    <title>Chit Chat</title>
+</head>
+<body>
+    <header>
+        <h1>Chit Chat</h1>
+    </header>
+    <main>
+        <div id="messageComposer">
+                <header>
+                    <h3 class="left">Posting as </h3>
+                    <button class='right' id='refreshButton' type="button">Refresh</button>
+                    <button class='right' id='postButton' type="button">Post</button>
+                </header>
+                <textarea id="inputBox" placeholder="Enter your message here!"></textarea>
+        </div>
+        <div id="messageContainer"></div>
+        <button id='loadButton' type="button">Load More</button>
+    </main>
+</body>
+</html>
