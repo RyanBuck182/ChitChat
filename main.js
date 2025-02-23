@@ -1,3 +1,5 @@
+// Server is no longer online. API calls have been replaced with placeholders.
+
 /**
  * Represents a response object with a list of messages.
  * @typedef {Object} MessageResponse
@@ -29,10 +31,9 @@
  * @property {string} message - The content of the message.
  */
 
-// changed for privacy
-const CHIT_CHAT_URL = "https://example.com/chitchat";
-const API_KEY = "abcd";
-const CLIENT_ID = "test@example.com";
+const CHIT_CHAT_URL = "-";
+const API_KEY = "-";
+const CLIENT_ID = "test2@example.com";
 
 /**
  * Makes a GET request to Chit Chat Server 
@@ -42,15 +43,35 @@ const CLIENT_ID = "test@example.com";
  * @returns {MessageResponse}
  */
 async function getMessages(skip = 0, limit = 20) {
-    const query = new URLSearchParams({
-        key: API_KEY,
-        client: CLIENT_ID,
-        skip: skip,
-        limit: limit,
-    });
-    const response = await fetch(`${CHIT_CHAT_URL}?${query}`);
-    const json = await response.json();
-    return json;
+    // const query = new URLSearchParams({
+    //     key: API_KEY,
+    //     client: CLIENT_ID,
+    //     skip: skip,
+    //     limit: limit,
+    // });
+    // const response = await fetch(`${CHIT_CHAT_URL}?${query}`);
+    // const json = await response.json();
+    // return json;
+
+    messageArr = [];
+    for (let i = 0; i < limit; i++) {
+        messageArr.push({
+            "_id": Math.floor(Math.random() * Number.MAX_SAFE_INTEGER),
+            "client": "test@example.com",
+            "date": "Jan 1 2000",
+            "dislikes": 10,
+            "ip": "127.0.0.1",
+            "likes": 10,
+            "loc": [0, 0],
+            "message": "This is an example message. Lorem ipsum odor amet, consectetuer adipiscing elit. Faucibus rutrum aenean; curae enim molestie rutrum augue. Quis primis adipiscing accumsan primis ad nibh ultricies amet. Odio condimentum ad aliquam ac cubilia, senectus nibh. Tempor fusce semper curabitur dapibus, platea vel neque maecenas ac. Sapien himenaeos maximus cubilia venenatis proin vivamus blandit.\n\nMollis commodo primis habitasse elementum consequat? Nibh lectus ultricies class suspendisse fringilla aptent. Suscipit vel mollis eu iaculis vitae, per consectetur nisl blandit. Mi mauris fusce enim quam senectus sapien nulla natoque. Mi curae imperdiet dapibus ante egestas. Nunc ullamcorper per faucibus; lacus suscipit metus."
+        });
+    }
+
+    return {
+        "count": limit,
+        "date": "2000-01-01",
+        "messages": messageArr
+    };
 }
 
 /**
@@ -59,18 +80,19 @@ async function getMessages(skip = 0, limit = 20) {
  * @returns {{ code: number; message: string }}
  */
 async function postMessage(message, latitude, longitude) {
-    const query = new URLSearchParams({
-        key: API_KEY,
-        client: CLIENT_ID,
-        lat: latitude,
-        lon: longitude,
-        message: message
-    });
-    const response = await fetch(`${CHIT_CHAT_URL}?${query}`, {
-       method: "POST" 
-    });
-    const json = await response.json();
-    return json;
+    // const query = new URLSearchParams({
+    //     key: API_KEY,
+    //     client: CLIENT_ID,
+    //     lat: latitude,
+    //     lon: longitude,
+    //     message: message
+    // });
+    // const response = await fetch(`${CHIT_CHAT_URL}?${query}`, {
+    //    method: "POST" 
+    // });
+    // const json = await response.json();
+    // return json;
+    return { "code": 0, "message": "" }
 }
 
 /**
@@ -79,15 +101,16 @@ async function postMessage(message, latitude, longitude) {
  * @returns {{ code: number; message: string }}
  */
 async function likeMessage(messageId) {
-    const query = new URLSearchParams({
-        key: API_KEY,
-        client: CLIENT_ID
-    });
-    const response = await fetch(`${CHIT_CHAT_URL}/like/${messageId}?${query}`, {
-       method: "GET" 
-    });
-    const json = await response.json();
-    return json;
+    // const query = new URLSearchParams({
+    //     key: API_KEY,
+    //     client: CLIENT_ID
+    // });
+    // const response = await fetch(`${CHIT_CHAT_URL}/like/${messageId}?${query}`, {
+    //    method: "GET" 
+    // });
+    // const json = await response.json();
+    // return json;
+    return { "code": 0, "message": "" }
 }
 
 /**
@@ -96,15 +119,16 @@ async function likeMessage(messageId) {
  * @returns {{ code: number; message: string }}
  */
 async function dislikeMessage(messageId) {
-    const query = new URLSearchParams({
-        key: API_KEY,
-        client: CLIENT_ID
-    });
-    const response = await fetch(`${CHIT_CHAT_URL}/dislike/${messageId}?${query}`, {
-       method: "GET" 
-    });
-    const json = await response.json();
-    return json;
+    // const query = new URLSearchParams({
+    //     key: API_KEY,
+    //     client: CLIENT_ID
+    // });
+    // const response = await fetch(`${CHIT_CHAT_URL}/dislike/${messageId}?${query}`, {
+    //    method: "GET" 
+    // });
+    // const json = await response.json();
+    // return json;
+    return { "code": 0, "message": "" }
 }
 
 let messageComposer = document.getElementById('messageComposer');
@@ -120,6 +144,7 @@ const likePath = 'Images/FullLike.png';
 const dislikePath = 'Images/FullDislike.png';
 
 let messagesOnScreen = 0;
+let clientPosition = null;
 
 /**
  * Displays the messages from a message response.
@@ -160,9 +185,7 @@ function createMessageElement(message) {
 
     //Sets message contents.
     messageElement.getElementsByClassName('content')[0].innerText = message.message;
-
     setMessageDistance(messageElement, message.loc)
-
     setMessageRatings(messageElement);
 
     return messageElement;
@@ -183,9 +206,9 @@ function setMessageDistance(messageElement, messageLocation) {
     }
     
     //Code inside runs once the client's position has been obtained.
-    navigator.geolocation.getCurrentPosition((clientPosition) => {
-        let clientLatitude = clientPosition.coords.latitude * Math.PI / 180;
-        let clientLongitude = clientPosition.coords.longitude * Math.PI / 180;
+    getClientPosition((pos) => {
+        let clientLatitude = pos.coords.latitude * Math.PI / 180;
+        let clientLongitude = pos.coords.longitude * Math.PI / 180;
     
         let messageLatitude = messageLocation[1] * Math.PI / 180;
         let messageLongitude = messageLocation[0] * Math.PI / 180;
@@ -249,11 +272,26 @@ function setMessageRatings(messageElement) {
 function makePost(clientPosition) {
     let latitude = clientPosition.coords.latitude;
     let longitude = clientPosition.coords.longitude;
-
-    postMessage(inputBox.value, latitude, longitude);
-
     let contents = inputBox.value;
-    getMessages(0, 1).then((messageResponse) => createMessageElementAfterPost(messageResponse, contents));
+
+    console.log([latitude, longitude])
+    postMessage(contents, latitude, longitude);
+
+    // getMessages(0, 1).then((messageResponse) => createMessageElementAfterPost(messageResponse, contents));
+    createMessageElementAfterPost({
+        "count": 1,
+        "date": Date(Date.now()).toLocaleString().split(" ").slice(1, 4).join(" "),
+        "messages": [{
+            "_id": Math.random() * Number.MAX_SAFE_INTEGER,
+            "client": CLIENT_ID,
+            "date": Date(Date.now()).toLocaleString().split(" ").slice(1, 4).join(" "),
+            "dislikes": 0,
+            "ip": "127.0.0.1",
+            "likes": 0,
+            "loc": [latitude, longitude],
+            "message": contents
+        }]
+    }, contents);
 
     inputBox.value = '';
 }
@@ -305,7 +343,23 @@ function rateMessage(messageId, buttons, action) {
         dislikeMessage(messageId);
     }
     else
-        console.log('Invalid rating action. Must be \'like\' or \'dislike\'.');
+        console.log("Invalid rating action. Must be 'like' or 'dislike'.");
+}
+
+/**
+ * Gets the client position
+ * @param {PositionCallback} callback
+ */
+async function getClientPosition(callback) {
+    if (clientPosition == null) {
+        navigator.geolocation.getCurrentPosition((pos) => {
+            clientPosition = pos
+            callback(pos)
+        }, null, positionOptions)
+    } else {
+        callback(clientPosition) 
+    }
+
 }
 
 /**
@@ -331,4 +385,4 @@ loadButton.onclick = () => {getMessages(messagesOnScreen).then((messageResponse)
 refreshButton.onclick = refreshMessages;
 
 //Connects the post button to makePost
-postButton.onclick = () => {navigator.geolocation.getCurrentPosition((clientPosition) => makePost(clientPosition), null, positionOptions)};
+postButton.onclick = () => {getClientPosition((pos) => makePost(pos), null, positionOptions)};

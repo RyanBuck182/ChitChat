@@ -19,6 +19,12 @@ h3 {
     margin: 0;
 }
 
+main {
+    display: grid;
+    margin: auto;
+    width: 80dvh;
+}
+
 #messageComposer {
     border: 0.2dvh solid black;
     border-radius: 0.8dvh;
@@ -149,6 +155,10 @@ h3 {
     
     h3 {
         font-size: 3dvw;
+    }
+
+    main {
+        width: 75dvw;
     }
 
     #messageComposer {
